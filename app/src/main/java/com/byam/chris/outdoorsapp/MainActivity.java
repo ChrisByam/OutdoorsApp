@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
                     //intent = new Intent(this, CompassActivity.class);
                 }
                 else if (position == 1) { //HRM
-                    intent = new Intent(this, HRMActivity.class);
+                    intent = new Intent(MainActivity.this, HRMActivity.class);
                 }
                 else if (position == 2){ //altitude
                     //intent = new Intent(this, AltitudeActivity.class);
