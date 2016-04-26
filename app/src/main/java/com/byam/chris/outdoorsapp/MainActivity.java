@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.content_main);
 
         //set up GridView for home page
-        GridView gv = (GridView) findViewById(R.id.gridview);
+        GridView gv = (GridView) findViewById(R.id.gridView);
         gv.setAdapter(new ImageAdapter(this));
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
