@@ -50,7 +50,6 @@ public class HRMActivity extends AppCompatActivity implements SensorEventListene
 
     @Override
     public void onSensorChanged(SensorEvent event){
-
         //check that sensor type is correct
         if (event.sensor.getType() == Sensor.TYPE_HEART_RATE){
             //check that value was registered...what to do if it's not?
@@ -59,5 +58,10 @@ public class HRMActivity extends AppCompatActivity implements SensorEventListene
             }
         }
     }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy){
+    }
+
 
 }
