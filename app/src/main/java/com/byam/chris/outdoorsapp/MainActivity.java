@@ -1,5 +1,6 @@
 package com.byam.chris.outdoorsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,19 +14,34 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
 
         //set up GridView for home page
         GridView gv = (GridView) findViewById(R.id.gridView);
         gv.setAdapter(new ImageAdapter(this));
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        //switch to proper activity on click of icon (identified by position variable)
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                //switch to proper activity
+                Intent intent = null;
+                if (position == 0) { //compass
+                    //intent = new Intent(this, CompassActivity.class);
+                }
+                else if (position == 1) { //HRM
+                    intent = new Intent(this, HRMActivity.class);
+                }
+                else if (position == 2){ //altitude
+                    //intent = new Intent(this, AltitudeActivity.class);
+                }
+                else{ //gps or some other function
+                    //intent = new Intent(this, GPSActivity.class);
+                }
+                startActivity(intent);
             }
         });
 
