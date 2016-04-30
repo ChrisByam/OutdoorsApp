@@ -1,5 +1,6 @@
 package com.byam.chris.outdoorsapp;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,6 +11,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class HRMActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -23,11 +29,18 @@ public class HRMActivity extends AppCompatActivity implements SensorEventListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_hrm);
 
-        //initialize Sensor and SensorManager
         sm = ((SensorManager)getSystemService(SENSOR_SERVICE));
         s = sm.getDefaultSensor(Sensor.TYPE_HEART_RATE);
 
-        //interact with view here...setOnInflatedListener(...)
+        //initialize sensor manager and sensor upon click
+        Button tryAgain = (Button)findViewById(R.id.button);
+        tryAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HRMActivity.this, HRMActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,7 +67,11 @@ public class HRMActivity extends AppCompatActivity implements SensorEventListene
         if (event.sensor.getType() == Sensor.TYPE_HEART_RATE){
             //check that value was registered...what to do if it's not?
             if ((int)event.values[0] > 0){
-                //set views in activity to result
+                TextView hrDisplay = (TextView)findViewById(R.id.textView2);
+                hrDisplay.setText("" + (int) event.values[0] + " bpm");
+
+                //pause sensor
+                onPause();
             }
         }
     }
