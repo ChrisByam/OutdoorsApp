@@ -30,16 +30,16 @@ public class MainActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Intent intent = null;
                 if (position == 0) { //compass
-                    //intent = new Intent(this, CompassActivity.class);
+                    intent = new Intent(MainActivity.this, CompassActivity.class);
                 }
                 else if (position == 1) { //HRM
                     intent = new Intent(MainActivity.this, HRMActivity.class);
                 }
                 else if (position == 2){ //altitude
-                    //intent = new Intent(this, AltitudeActivity.class);
+                    //intent = new Intent(MainActivity.this, AltitudeActivity.class);
                 }
                 else{ //gps or some other function
-                    //intent = new Intent(this, GPSActivity.class);
+                    //intent = new Intent(MainActivity.this, GPSActivity.class);
                 }
                 startActivity(intent);
             }

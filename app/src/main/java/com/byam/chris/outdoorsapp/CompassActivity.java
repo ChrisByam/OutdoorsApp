@@ -6,26 +6,26 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class HRMActivity extends AppCompatActivity implements SensorEventListener {
+/**
+ * Created by Chris on 4/30/2016.
+ */
+
+//use geomagnetic field sensor and accelerometer to report compass bearing
+//copied and pasted HRM code for now (going to be a little more complex)
+public class CompassActivity extends AppCompatActivity implements SensorEventListener {
 
     Sensor s;
     SensorManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_hrm);
+        /*super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_compass);
 
         sm = ((SensorManager)getSystemService(SENSOR_SERVICE));
         s = sm.getDefaultSensor(Sensor.TYPE_HEART_RATE);
@@ -38,7 +38,7 @@ public class HRMActivity extends AppCompatActivity implements SensorEventListene
                 Intent intent = new Intent(HRMActivity.this, HRMActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override
@@ -68,7 +68,7 @@ public class HRMActivity extends AppCompatActivity implements SensorEventListene
                 TextView hrDisplay = (TextView)findViewById(R.id.textView2);
                 hrDisplay.setText("" + (int) event.values[0] + " bpm");
 
-                //pause sensor after reading
+                //pause sensor
                 onPause();
             }
         }
@@ -77,6 +77,5 @@ public class HRMActivity extends AppCompatActivity implements SensorEventListene
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy){
     }
-
 
 }
