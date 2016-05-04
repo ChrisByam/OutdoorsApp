@@ -22,7 +22,7 @@ import android.widget.TextView;
 //copied and pasted HRM code for now (going to be a little more complex)
 public class CompassActivity extends AppCompatActivity implements SensorEventListener {
 
-    private ImageView mPointer;
+    ImageView mPointer;
     Sensor a;
     Sensor m;
     SensorManager sm;
@@ -44,16 +44,6 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         m = sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
         mPointer = (ImageView) findViewById(R.id.imageView);
-
-        /*restart activity if try again button is clicked
-        Button tryAgain = (Button)findViewById(R.id.button);
-        tryAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CompassActivity.this, HRMActivity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
     @Override
@@ -74,6 +64,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
 
     @Override
     public void onSensorChanged(SensorEvent event){
+        //copy values from sensors into arrays
         if (event.sensor == a) {
             System.arraycopy(event.values, 0, mLastAcc, 0, event.values.length);
             mLastAccSet = true;
@@ -81,14 +72,15 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             System.arraycopy(event.values, 0, mLastMag, 0, event.values.length);
             mLastMagSet = true;
         }
+        //if sensors contain values, perform orientation analysis
         if (mLastAccSet && mLastMagSet) {
             SensorManager.getRotationMatrix(mR, null, mLastAcc, mLastMag);
             SensorManager.getOrientation(mR, mOrientation);
             float azimuthInRadians = mOrientation[0];
-            float azimuthInDegress = (float)(Math.toDegrees(azimuthInRadians)+360)%360;
+            float azimuthInDegrees = (float)(Math.toDegrees(azimuthInRadians)+360)%360;
             RotateAnimation ra = new RotateAnimation(
                     mCurrentDegree,
-                    -azimuthInDegress,
+                    -azimuthInDegrees,
                     Animation.RELATIVE_TO_SELF, 0.5f,
                     Animation.RELATIVE_TO_SELF,
                     0.5f);
@@ -96,7 +88,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             ra.setDuration(250);
             ra.setFillAfter(true);
             mPointer.startAnimation(ra);
-            mCurrentDegree = -azimuthInDegress;
+            mCurrentDegree = -azimuthInDegrees;
         }
     }
 
