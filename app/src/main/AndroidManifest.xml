@@ -38,6 +38,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.byam.chris.outdoorsapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".AltitudeActivity"
+            android:label="@string/title_activity_altitude"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
