@@ -24,8 +24,8 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_compass);
+        super.onCreate(savedInstanceState);
+        //setContentView(R.layout.content_compass);
 
         sm = ((SensorManager)getSystemService(SENSOR_SERVICE));
         s = sm.getDefaultSensor(Sensor.TYPE_HEART_RATE);
@@ -35,10 +35,10 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         tryAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HRMActivity.this, HRMActivity.class);
+                Intent intent = new Intent(CompassActivity.this, HRMActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
     @Override
